@@ -7,3 +7,8 @@ build:
 .PHONY: download
 download:
 		docker run --rm -it -v $(shell pwd):/usr/src/app $(IMAGE_NAME) download_data.py
+
+.PHONE: freeze
+freeze:
+		@echo "pip freeze > requirements.txt"
+		@.venv/bin/pip freeze > requirements.txt
