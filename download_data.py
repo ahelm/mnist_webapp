@@ -42,7 +42,7 @@ def warning(message: str) -> None:
 
 def status(message: str, add_star: bool = True) -> None:
     """Prints status message where `message` is the message string."""
-    print(f"{'*' + message if add_star else message}", end="", flush=True)
+    print(f"{'* ' + message if add_star else message}", end="", flush=True)
 
 
 def done() -> None:
@@ -116,10 +116,10 @@ def main():
         status("Unpacking data -> ")
         raw_imgs = get_image_data(img["raw path"])
 
-        status("Unpacking labels -> ")
+        status("Unpacking labels -> ", add_star=False)
         raw_labels = get_labels(label["raw path"])
 
-        status("Writting image data ... ")
+        status("Writting image data ... ", add_star=False)
         for i, (arr, l) in enumerate(zip(raw_imgs, raw_labels)):
             output_dir = DATA_DIR / sub_dir
             output_dir.mkdir(parents=True, exist_ok=True)
