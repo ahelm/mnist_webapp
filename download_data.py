@@ -3,8 +3,8 @@ from gzip import GzipFile
 from pathlib import Path
 
 import numpy as np
-import png
 import requests
+from PIL import Image
 
 DATA_DIR = (Path(__file__).parent / "data").resolve()
 
@@ -126,7 +126,7 @@ def main():
             png_file = output_dir / f"{i:05}.png"
             if png_file.exists():
                 continue
-            png.from_array(arr, "L").save(png_file)
+            Image.fromarray(arr, mode="L").save(png_file)
         done()
 
         img["raw path"].unlink()
