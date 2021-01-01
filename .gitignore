@@ -173,3 +173,7 @@ dmypy.json
 !.vscode/launch.json
 !.vscode/extensions.json
 *.code-workspace
+
+# data directory - for images
+data/*
+!data/.gitkeep
