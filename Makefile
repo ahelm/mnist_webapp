@@ -25,7 +25,7 @@ serve:
 		docker run --rm -it -v $(shell pwd):/usr/src/app \
 			--entrypoint "./run_server.sh" \
 			--name "$(IMAGE_NAME)_serve" \
-			-p 8888:8000 \
+			-p 8000:8000 \
 			$(IMAGE_NAME)
 
 .PHONY: freeze
