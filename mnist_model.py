@@ -15,14 +15,16 @@ from tqdm import tqdm
 
 load_dotenv()
 
-DATA_DIR = os.getenv("DATA_DIR", default=".")
+DATA_DIR = os.getenv("DATA_DIR", default="data")
 BATCH_SIZE = int(os.getenv("BATCH_SIZE", default="64"))
 TEST_BATCH_SIZE = int(os.getenv("TEST_BATCH_SIZE", default="1024"))
-NORM_MEAN = float(os.getenv("NORM_MEAN", default="0.5"))
-NORM_STD = float(os.getenv("NORM_STD", default="0.001"))
+# print(torch.mean(train_dataset.data / 255))
+NORM_MEAN = float(os.getenv("NORM_MEAN", default="0.1307"))
+# print(torch.std(train_dataset.data / 255))
+NORM_STD = float(os.getenv("NORM_STD", default="0.3081"))
 LEARNING_RATE = float(os.getenv("LEARNING_RATE", default="1.0"))
 LEARNING_STEP_GAMMA = float(os.getenv("LEARNING_STEP_GAMMA", default="0.7"))
-NUM_EPOCHS = int(os.getenv("NUM_EPOCHS", default="1"))
+NUM_EPOCHS = int(os.getenv("NUM_EPOCHS", default="14"))
 
 
 class Net(nn.Module):
