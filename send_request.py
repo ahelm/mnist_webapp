@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import os
 from pathlib import Path
+from random import sample
 
 import requests
 from dotenv import load_dotenv
@@ -9,12 +10,30 @@ load_dotenv()
 DATA_DIR = os.getenv("DATA_DIR", default="data")
 
 
-test_pngs = sorted((Path(DATA_DIR) / "MNIST" / "png" / "test").glob("*.png"))
-test_labels = [s.stem.split("_")[1] for s in test_pngs]
+def get_label(p: Path) -> int:
+    return int(p.stem.split("_")[1])
 
-print(f"> using     -> {test_labels[8]}")
 
-resp = requests.post(
-    "http://localhost:8000/predict", files={"file": open(test_pngs[8], "rb")}
-)
-print(f"> predicted -> {resp.json()}")
+def get_prediction(p: Path) -> int:
+    resp = requests.post(
+        "http://localhost:8000/predict", files={"file": p.read_bytes()}
+    )
+
+    return resp.json()
+
+
+def main() -> None:
+    train_pngs = sorted((Path(DATA_DIR) / "MNIST" / "png" / "train").glob("*.png"))
+    test_pngs = sorted((Path(DATA_DIR) / "MNIST" / "png" / "test").glob("*.png"))
+    all_pngs = train_pngs + test_pngs
+
+    for p in sample(all_pngs, 10_000):
+        respond = get_prediction(p)
+        label = get_label(p)
+
+        if label != respond:
+            print(f"mismatches: {p} (predicted: {respond})")
+
+
+if __name__ == "__main__":
+    main()
