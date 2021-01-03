@@ -175,5 +175,4 @@ dmypy.json
 *.code-workspace
 
 # data directory - for images
-data/*
-!data/.gitkeep
+data
