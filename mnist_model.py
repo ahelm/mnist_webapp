@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import os
+from pathlib import Path
 
 import torch
 from dotenv import load_dotenv
@@ -131,7 +132,9 @@ def main():
         test(model, device, test_loader)
         scheduler.step()
 
-    torch.save(model.state_dict(), f"{DATA_DIR}/mnist_model.pt")
+    term_width = os.get_terminal_size().columns
+    print(" SAVING MODEL ".center(term_width, "="))
+    torch.save(model.state_dict(), Path(f"{DATA_DIR}/mnist_model.pt"))
 
 
 if __name__ == "__main__":
