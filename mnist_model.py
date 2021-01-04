@@ -24,7 +24,7 @@ NORM_MEAN = float(os.getenv("NORM_MEAN", default="0.1307"))
 NORM_STD = float(os.getenv("NORM_STD", default="0.3081"))
 LEARNING_RATE = float(os.getenv("LEARNING_RATE", default="1.0"))
 LEARNING_STEP_GAMMA = float(os.getenv("LEARNING_STEP_GAMMA", default="0.7"))
-NUM_EPOCHS = int(os.getenv("NUM_EPOCHS", default="14"))
+NUM_EPOCHS = int(os.getenv("NUM_EPOCHS", default="1"))
 
 
 class Net(nn.Module):
