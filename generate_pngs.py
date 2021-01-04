@@ -19,9 +19,11 @@ def store_png(dataset: datasets.MNIST, folder_name: str) -> None:
         if not output_dir.exists():
             output_dir.mkdir(parents=True, exist_ok=True)
         image = Image.fromarray(data.numpy(), "L")
-        image.save(
-            output_dir / f"{i:0{ceil(log10(dataset.data.shape[0]))}d}_{label:1d}.png"
-        )
+        length_of_num = ceil(log10(dataset.data.shape[0]))
+        image_path = output_dir / f"{i:0{length_of_num}d}_{label:1d}.png"
+        if image_path.exists():
+            continue
+        image.save(image_path)
 
 
 if __name__ == "__main__":
