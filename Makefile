@@ -13,7 +13,7 @@ serve: data/mnist_model.pt
 
 .PHONY: build
 build:
-		docker buildx build . -t $(IMAGE_NAME) --platform linux/amd64
+		docker build . -t $(IMAGE_NAME) --platform linux/amd64
 
 data/mnist_model.pt: train
 
