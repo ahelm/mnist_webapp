@@ -39,10 +39,14 @@ pngs:
 freeze:
 		.venv/bin/pip freeze > requirements.txt
 
-.PHONY: clean
-clean:
+.PHONY: clean-image
+clean-image:
 		docker image rm $(IMAGE_NAME)
 
+.PHONY: clean-model
+clean-model:
+		rm data/mnist_model.pt
+
 .PHONY: clean-all
-clean-all: clean
+clean-all: clean-image clean-model
 		rm -rf data
