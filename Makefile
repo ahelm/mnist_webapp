@@ -7,6 +7,7 @@ serve: data/mnist_model.pt
 			--platform linux/amd64 \
 			--entrypoint "./run_server.sh" \
 			--name "$(IMAGE_NAME)_serve" \
+			--user $(shell id -u):$(shell id -g) \
 			-p 8000:8000 \
 			$(IMAGE_NAME)
 
@@ -21,6 +22,7 @@ train: build
 		docker run --rm -it -v $(shell pwd):/usr/src/app \
 			--platform linux/amd64 \
 			--name "$(IMAGE_NAME)_train" \
+			--user $(shell id -u):$(shell id -g) \
 			$(IMAGE_NAME) \
 			mnist_model.py
 
@@ -29,6 +31,7 @@ pngs:
 		docker run --rm -it -v $(shell pwd):/usr/src/app \
 			--platform linux/amd64 \
 			--name "$(IMAGE_NAME)_png" \
+			--user $(shell id -u):$(shell id -g) \
 			$(IMAGE_NAME) \
 			generate_pngs.py
 
